@@ -1,3 +1,6 @@
 module "vpc" {
-  source = "git::https://github.com/amrutanubhav/tf-module-vpc.git"
+  source = "./vendor/modules/vpc" ## source is now changed to this as terrafile is used to pull git repo to local
+  VPC_CIDR = var.VPC_CIDR ## calling the variable within module
 }
+
+ 
