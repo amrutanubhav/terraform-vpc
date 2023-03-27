@@ -2,7 +2,7 @@ pipeline {
     agent any 
 
         parameters {
-             choice(name: 'env', choices: ['dev','prod'], description: 'Chose an environment')
+             choice(name: "'env'", choices: ['dev','prod'], description: 'Chose an environment')
              choice(name: 'action', choices: ['apply', 'destroy'], description: 'Chose action to be apply or destroy')
         }
         
@@ -11,6 +11,15 @@ pipeline {
         // }
 
     stages {
+
+        stage('Terraform test') {
+            steps {
+                sh "echo ${env}"
+                // sh "terrafile -f env-${env}/Terrafile"
+                // sh "terraform init -backend-config=env-${env}/${env}-backend.tfvars"
+            }
+        }
+
         stage('Terraform Init') {
             steps {
                 sh "terrafile -f env-${env}/Terrafile"
